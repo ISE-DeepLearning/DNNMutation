@@ -1,6 +1,7 @@
 import numpy as np
 from tensorflow.examples.tutorials.mnist import input_data
 from sklearn.metrics import accuracy_score
+import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
     mnist = input_data.read_data_sets("../MNIST_data/", one_hot=True)
@@ -77,48 +78,76 @@ if __name__ == '__main__':
 
         # 模型激活的神经元统计
         # 各自激活的神经元
-        print()
-        print('第一层')
+        # print()
+        # print('第一层')
         rate11 = 2
-        print('各自激活的神经元,阈值为{}'.format(rate11))
+        # print('各自激活的神经元,阈值为{}'.format(rate11))
         temp11 = np.where(level11 > rate11)
-        print(temp11)
+        # print(temp11)
         temp112 = np.where(level12 > rate11)
-        print(temp112)
+        # print(temp112)
         # 激活值差值
         rate12 = 1
-        print('激活值差的绝对值大于阈值的神经元如下，阈值为{}'.format(rate12))
+        # print('激活值差的绝对值大于阈值的神经元如下，阈值为{}'.format(rate12))
         compare1 = level11 - level12
         compare1 = np.abs(compare1)
         minus1 = np.where(compare1 > rate12)
-        print(minus1)
+        # print(minus1)
 
-        print('第二层')
+        # print('第二层')
         rate21 = 2
-        print('各自激活的神经元,阈值为{}'.format(rate21))
+        # print('各自激活的神经元,阈值为{}'.format(rate21))
         temp21 = np.where(level21 > rate21)
-        print(temp21)
+        # print(temp21)
         temp212 = np.where(level22 > rate21)
-        print(temp212)
+        # print(temp212)
         # 激活值差值
         rate22 = 1
-        print('激活值差的绝对值大于阈值的神经元如下，阈值为{}'.format(rate22))
+        # print('激活值差的绝对值大于阈值的神经元如下，阈值为{}'.format(rate22))
         compare2 = level21 - level22
         compare2 = np.abs(compare2)
         minus2 = np.where(compare2 > rate22)
-        print(minus2)
+        # print(minus2)
 
-        print('第三层')
+        # print('第三层')
         rate31 = 0.2
-        print('各自激活的神经元,阈值为{}'.format(rate31))
+        # print('各自激活的神经元,阈值为{}'.format(rate31))
         temp31 = np.where(level31 > rate31)
-        print(temp31)
+        # print(temp31)
         temp312 = np.where(level32 > rate31)
-        print(temp312)
+        # print(temp312)
         # 激活值差值
         rate32 = 0.1
-        print('激活值差的绝对值大于阈值的神经元如下，阈值为{}'.format(rate32))
+        # print('激活值差的绝对值大于阈值的神经元如下，阈值为{}'.format(rate32))
         compare3 = level31 - level32
         compare3 = np.abs(compare3)
         minus3 = np.where(compare3 > rate32)
-        print(minus3)
+        # print(minus3)
+
+        # 第一层图片
+        plt.hist(range(128), 128, weights=level11, color='blue', alpha=0.7, label='B model')
+        plt.hist(range(128), 128, weights=level12, label='C model', color='red')
+        plt.xlabel('neuron location in level 1')
+        plt.ylabel('activation value')
+        plt.legend()
+        plt.savefig("compare_pic/compare_index_" + str(index) + '_level_1.png')
+        plt.show()
+
+        # 第二层图片
+        plt.hist(range(64), 64, weights=level21, color='blue', alpha=0.7, label='B model')
+        plt.hist(range(64), 64, weights=level22, label='C model', color='red')
+        plt.xlabel('neuron location in level 2')
+        plt.ylabel('activation value')
+        plt.legend()
+        plt.savefig("compare_pic/compare_index_" + str(index) + '_level_2.png')
+        plt.show()
+
+        # 第三层图片
+        plt.hist(range(10), 10, weights=level31, color='blue', alpha=0.7, label='B model')
+        plt.hist(range(10), 10, weights=level32, label='C model', color='red')
+        plt.xlabel('neuron location in level 3')
+        plt.ylabel('activation value')
+        plt.legend()
+        plt.savefig("compare_pic/compare_index_" + str(index) + '_level_3.png')
+        plt.show()
+
