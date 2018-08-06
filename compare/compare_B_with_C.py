@@ -65,6 +65,8 @@ if __name__ == '__main__':
     check_list = [both_right[br_index], only_B_right[oB_index], only_C_right[oC_index], both_wrong[bw_index]]
     print(check_list)
 
+    # check_list = [2551, 4571, 4731, 2387]
+
     for index in check_list:
         print()
         print('第{}张图片'.format(index))
@@ -75,12 +77,13 @@ if __name__ == '__main__':
         level22 = level2_model2[index]
         level31 = level3_model1[index]
         level32 = level3_model2[index]
+        label = np.argmax(standard_label[index])
 
         # 模型激活的神经元统计
         # 各自激活的神经元
         # print()
-        # print('第一层')
-        rate11 = 2
+        print('第一层')
+        rate11 = 1
         # print('各自激活的神经元,阈值为{}'.format(rate11))
         temp11 = np.where(level11 > rate11)
         # print(temp11)
@@ -94,8 +97,8 @@ if __name__ == '__main__':
         minus1 = np.where(compare1 > rate12)
         # print(minus1)
 
-        # print('第二层')
-        rate21 = 2
+        print('第二层')
+        rate21 = 1
         # print('各自激活的神经元,阈值为{}'.format(rate21))
         temp21 = np.where(level21 > rate21)
         # print(temp21)
@@ -109,45 +112,69 @@ if __name__ == '__main__':
         minus2 = np.where(compare2 > rate22)
         # print(minus2)
 
-        # print('第三层')
-        rate31 = 0.2
+        print('第三层')
+        rate31 = 0.1
         # print('各自激活的神经元,阈值为{}'.format(rate31))
         temp31 = np.where(level31 > rate31)
         # print(temp31)
         temp312 = np.where(level32 > rate31)
         # print(temp312)
         # 激活值差值
-        rate32 = 0.1
-        # print('激活值差的绝对值大于阈值的神经元如下，阈值为{}'.format(rate32))
+        rate32 = 0.05
+        print('激活值差的绝对值大于阈值的神经元如下，阈值为{}'.format(rate32))
         compare3 = level31 - level32
         compare3 = np.abs(compare3)
         minus3 = np.where(compare3 > rate32)
-        # print(minus3)
+        print(minus3)
 
         # 第一层图片
-        plt.hist(range(128), 128, weights=level11, color='blue', alpha=0.7, label='B model')
+        # plt.hist(range(128), 128, weights=level11, color='blue', alpha=0.7, label='B model')
+        # plt.hist(range(128), 128, weights=level12, label='C model', color='red')
+        # plt.xlabel('neuron location in level 1 for label ' + str(label))
+        # plt.ylabel('activation value')
+        # plt.legend()
+        # plt.savefig("compare_pic/compare_index_" + str(index) + '_level_1_label_' + str(label) + '.png')
+        # plt.show()
+
         plt.hist(range(128), 128, weights=level12, label='C model', color='red')
-        plt.xlabel('neuron location in level 1')
+        plt.hist(range(128), 128, weights=level11, color='blue', alpha=0.7, label='B model')
+        plt.xlabel('neuron location in level 1 for label ' + str(label))
         plt.ylabel('activation value')
         plt.legend()
-        plt.savefig("compare_pic/compare_index_" + str(index) + '_level_1.png')
+        plt.savefig("compare_pic/compare_index_" + str(index) + '_level_1_label_' + str(label) + '.png')
         plt.show()
 
         # 第二层图片
-        plt.hist(range(64), 64, weights=level21, color='blue', alpha=0.7, label='B model')
+        # plt.hist(range(64), 64, weights=level21, color='blue', alpha=0.7, label='B model')
+        # plt.hist(range(64), 64, weights=level22, label='C model', color='red')
+        # plt.xlabel('neuron location in level 2 for label ' + str(label))
+        # plt.ylabel('activation value')
+        # plt.legend()
+        # plt.savefig("compare_pic/compare_index_" + str(index) + '_level_2_label_' + str(label) + '.png')
+        # plt.show()
+
         plt.hist(range(64), 64, weights=level22, label='C model', color='red')
-        plt.xlabel('neuron location in level 2')
+        plt.hist(range(64), 64, weights=level21, color='blue', alpha=0.7, label='B model')
+        plt.xlabel('neuron location in level 2 for label ' + str(label))
         plt.ylabel('activation value')
         plt.legend()
-        plt.savefig("compare_pic/compare_index_" + str(index) + '_level_2.png')
+        plt.savefig("compare_pic/compare_index_" + str(index) + '_level_2_label_' + str(label) + '.png')
         plt.show()
 
         # 第三层图片
-        plt.hist(range(10), 10, weights=level31, color='blue', alpha=0.7, label='B model')
+        # plt.hist(range(10), 10, weights=level31, color='blue', alpha=0.7, label='B model')
+        # plt.hist(range(10), 10, weights=level32, label='C model', color='red')
+        # plt.xlabel('neuron location in level 3 for label ' + str(label))
+        # plt.ylabel('activation value')
+        # plt.legend()
+        # plt.savefig("compare_pic/compare_index_" + str(index) + '_level_3_label_' + str(label) + '.png')
+        # plt.show()
+
         plt.hist(range(10), 10, weights=level32, label='C model', color='red')
-        plt.xlabel('neuron location in level 3')
+        plt.hist(range(10), 10, weights=level31, color='blue', alpha=0.7, label='B model')
+        plt.xlabel('neuron location in level 3 for label ' + str(label))
         plt.ylabel('activation value')
         plt.legend()
-        plt.savefig("compare_pic/compare_index_" + str(index) + '_level_3.png')
+        plt.savefig("compare_pic/compare_index_" + str(index) + '_level_3_label_' + str(label) + '.png')
         plt.show()
 
