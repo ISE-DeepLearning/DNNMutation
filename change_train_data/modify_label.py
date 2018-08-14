@@ -1,10 +1,6 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
-from keras import Model,Input
-from keras.callbacks import ModelCheckpoint
-from keras.layers import Dense,Activation
 from tensorflow.examples.tutorials.mnist import input_data
-from sklearn.metrics import accuracy_score
 import numpy as np
 
 
@@ -36,7 +32,7 @@ def change_pic_label(data, percent):
         change_data[location] = temp
         print('after', change_data[location])
 
-    save_path = 'modify_label_data/data/change_' + str(percent).replace('.', '')
+    save_path = 'modify_label_data/data/change_label_' + str(percent).replace('.', '')
     np.save(save_path, change_data)
     return change_data
 
@@ -45,12 +41,17 @@ if __name__ == '__main__':
 
     mnist = input_data.read_data_sets("../MNIST_data/", one_hot=True)
 
+    rate = 1
+    rate_list = []
+    for i in range(1000):
+        rate_list.append(rate/10000)
+        rate += 1
+    print(rate_list)
     # 比率
-    # rate = 0.001
     # rate_list = [0.001, 0.01, 0.02, 0.05, 0.1, 1]
-    rate_list = [0.2, 0.4, 0.5, 0.6, 0.8]
+    # rate_list = [0.2, 0.4, 0.5, 0.6, 0.8]
     image_labels = mnist.train.labels
-
+    #
     for rate in rate_list:
         labels = np.copy(image_labels)
         result = change_pic_label(labels, rate)
