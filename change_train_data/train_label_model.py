@@ -36,15 +36,21 @@ if __name__ == '__main__':
     mnist = input_data.read_data_sets("../MNIST_data/", one_hot=True)
 
     # rate_list = [0.001, 0.01, 0.02, 0.05, 0.1, 1]
-    rate_list = [0.2, 0.4, 0.5, 0.6, 0.8]
+    # rate_list = [0.2, 0.4, 0.5, 0.6, 0.8]
+    rate = 1000
+    rate_list = []
+    for i in range(1000, 1001):
+        rate_list.append(rate / 10000)
+        rate += 1
+    print(rate_list)
     train_data = mnist.train.images
 
     for rate in rate_list:
         print('rate:' + str(rate))
         rate_str = str(rate).replace('.', '')
-        predict_path = 'modify_label_data/predict/predict_' + rate_str + '.npy'
-        model_path = 'modify_label_data/model/model_' + rate_str + '.hdf5'
-        train_label = 'modify_label_data/data/change_' + rate_str + '.npy'
+        predict_path = 'modify_label_data/predict/predict_cl_' + rate_str + '.npy'
+        model_path = 'modify_label_data/model/model_cl_' + rate_str + '.hdf5'
+        train_label = 'modify_label_data/data/change_label_' + rate_str + '.npy'
         train_label_data = np.load(train_label)
 
         train_model(train_data, train_label_data, model_path, predict_path)
