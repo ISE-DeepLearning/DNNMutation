@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
     mnist = input_data.read_data_sets("../MNIST_data/", one_hot=True)
-    model_path_1 = 'detail_data/change_label_001.npz'
+    model_path_1 = 'detail_data/change_label_01.npz'
     model_path_2 = 'detail_data/din_407.npz'
 
     model_data_1 = np.load(model_path_1)
@@ -127,54 +127,54 @@ if __name__ == '__main__':
         minus3 = np.where(compare3 > rate32)
         print(minus3)
 
-        # 第一层图片
-        # plt.hist(range(128), 128, weights=level11, color='blue', alpha=0.7, label='B model')
+        # # 第一层图片
+        # # plt.hist(range(128), 128, weights=level11, color='blue', alpha=0.7, label='B model')
+        # # plt.hist(range(128), 128, weights=level12, label='C model', color='red')
+        # # plt.xlabel('neuron location in level 1 for label ' + str(label))
+        # # plt.ylabel('activation value')
+        # # plt.legend()
+        # # plt.savefig("compare_pic/compare_index_" + str(index) + '_level_1_label_' + str(label) + '.png')
+        # # plt.show()
+        #
         # plt.hist(range(128), 128, weights=level12, label='C model', color='red')
+        # plt.hist(range(128), 128, weights=level11, color='blue', alpha=0.7, label='B model')
         # plt.xlabel('neuron location in level 1 for label ' + str(label))
         # plt.ylabel('activation value')
         # plt.legend()
         # plt.savefig("compare_pic/compare_index_" + str(index) + '_level_1_label_' + str(label) + '.png')
         # plt.show()
-
-        plt.hist(range(128), 128, weights=level12, label='C model', color='red')
-        plt.hist(range(128), 128, weights=level11, color='blue', alpha=0.7, label='B model')
-        plt.xlabel('neuron location in level 1 for label ' + str(label))
-        plt.ylabel('activation value')
-        plt.legend()
-        plt.savefig("compare_pic/compare_index_" + str(index) + '_level_1_label_' + str(label) + '.png')
-        plt.show()
-
-        # 第二层图片
-        # plt.hist(range(64), 64, weights=level21, color='blue', alpha=0.7, label='B model')
+        #
+        # # 第二层图片
+        # # plt.hist(range(64), 64, weights=level21, color='blue', alpha=0.7, label='B model')
+        # # plt.hist(range(64), 64, weights=level22, label='C model', color='red')
+        # # plt.xlabel('neuron location in level 2 for label ' + str(label))
+        # # plt.ylabel('activation value')
+        # # plt.legend()
+        # # plt.savefig("compare_pic/compare_index_" + str(index) + '_level_2_label_' + str(label) + '.png')
+        # # plt.show()
+        #
         # plt.hist(range(64), 64, weights=level22, label='C model', color='red')
+        # plt.hist(range(64), 64, weights=level21, color='blue', alpha=0.7, label='B model')
         # plt.xlabel('neuron location in level 2 for label ' + str(label))
         # plt.ylabel('activation value')
         # plt.legend()
         # plt.savefig("compare_pic/compare_index_" + str(index) + '_level_2_label_' + str(label) + '.png')
         # plt.show()
-
-        plt.hist(range(64), 64, weights=level22, label='C model', color='red')
-        plt.hist(range(64), 64, weights=level21, color='blue', alpha=0.7, label='B model')
-        plt.xlabel('neuron location in level 2 for label ' + str(label))
-        plt.ylabel('activation value')
-        plt.legend()
-        plt.savefig("compare_pic/compare_index_" + str(index) + '_level_2_label_' + str(label) + '.png')
-        plt.show()
-
-        # 第三层图片
-        # plt.hist(range(10), 10, weights=level31, color='blue', alpha=0.7, label='B model')
+        #
+        # # 第三层图片
+        # # plt.hist(range(10), 10, weights=level31, color='blue', alpha=0.7, label='B model')
+        # # plt.hist(range(10), 10, weights=level32, label='C model', color='red')
+        # # plt.xlabel('neuron location in level 3 for label ' + str(label))
+        # # plt.ylabel('activation value')
+        # # plt.legend()
+        # # plt.savefig("compare_pic/compare_index_" + str(index) + '_level_3_label_' + str(label) + '.png')
+        # # plt.show()
+        #
         # plt.hist(range(10), 10, weights=level32, label='C model', color='red')
+        # plt.hist(range(10), 10, weights=level31, color='blue', alpha=0.7, label='B model')
         # plt.xlabel('neuron location in level 3 for label ' + str(label))
         # plt.ylabel('activation value')
         # plt.legend()
         # plt.savefig("compare_pic/compare_index_" + str(index) + '_level_3_label_' + str(label) + '.png')
         # plt.show()
-
-        plt.hist(range(10), 10, weights=level32, label='C model', color='red')
-        plt.hist(range(10), 10, weights=level31, color='blue', alpha=0.7, label='B model')
-        plt.xlabel('neuron location in level 3 for label ' + str(label))
-        plt.ylabel('activation value')
-        plt.legend()
-        plt.savefig("compare_pic/compare_index_" + str(index) + '_level_3_label_' + str(label) + '.png')
-        plt.show()
 
